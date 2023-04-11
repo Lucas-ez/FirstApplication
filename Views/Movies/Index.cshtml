@@ -1,0 +1,24 @@
+﻿@model FirstApplication.ViewModels.MoviesViewModel
+@{
+}
+
+<div>
+	<h1>Movies</h1>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var movie in Model.Movies)
+				{
+					<tr>
+						<td>
+							@movie.Name
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+</div>
