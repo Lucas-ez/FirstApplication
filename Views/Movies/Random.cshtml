@@ -5,9 +5,9 @@
   var noCustomersClass = Model.Customers?.Count == 0 ? "red-text" : null;
 }
 
-<h1>@Model.Movie?.Name</h1>
+<h1>@Model.Movie.Name</h1>
 
-@if (Model.Customers?.Count == 0)
+@if (Model.Customers.Count == 0)
 {
   <p class="@noCustomersClass">No customers yet</p>
 }
