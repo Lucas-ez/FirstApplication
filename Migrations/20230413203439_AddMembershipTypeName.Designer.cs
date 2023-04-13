@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FirstApplication.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20230413192933_PopulateMembershipTypes")]
-    partial class PopulateMembershipTypes
+    [Migration("20230413203439_AddMembershipTypeName")]
+    partial class AddMembershipTypeName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,8 @@ namespace FirstApplication.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -59,6 +60,11 @@ namespace FirstApplication.Migrations
 
                     b.Property<byte>("DurationInMonths")
                         .HasColumnType("tinyint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<short>("SingUpFee")
                         .HasColumnType("smallint");
