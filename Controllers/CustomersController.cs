@@ -8,9 +8,9 @@ namespace FirstApplication.Controllers
   {
     private MyDbContext _context;
 
-    public CustomersController()
+    public CustomersController(MyDbContext context)
     {
-      _context = new MyDbContext();
+      _context = context;
     }
 
     protected override void Dispose(bool disposing)
