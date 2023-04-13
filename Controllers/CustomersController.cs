@@ -6,13 +6,21 @@ namespace FirstApplication.Controllers
 {
   public class CustomersController : Controller
   {
+    private MyDbContext _context;
+
+    public CustomersController()
+    {
+      _context = new MyDbContext();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+      _context.Dispose();
+    }
+
     public IActionResult Index()
     {
-      var customers = new List<Customer>
-      {
-        new Customer {Id = 1, Name = "John Smith"},
-        new Customer {Id = 2, Name = "Mary Williams"}
-      };
+      var customers = _context.Customer.ToList();
 
       var viewModel = new CustomersViewModel { Customers = customers };
 
@@ -21,13 +29,7 @@ namespace FirstApplication.Controllers
     public IActionResult Details(int id)
     {
 
-      var customers = new List<Customer>
-      {
-        new Customer {Id = 1, Name = "John Smith"},
-        new Customer {Id = 2, Name = "Mary Williams"}
-      };
-
-      var customer = customers.Find(c => c.Id == id);
+      var customer = _context.Customer.SingleOrDefault(c => c.Id == id);
 
       if (customer == null) return StatusCode(404);
 
