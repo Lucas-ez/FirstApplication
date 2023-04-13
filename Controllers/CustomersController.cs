@@ -1,6 +1,7 @@
 ﻿using FirstApplication.Models;
 using FirstApplication.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirstApplication.Controllers
 {
@@ -20,7 +21,7 @@ namespace FirstApplication.Controllers
 
     public IActionResult Index()
     {
-      var customers = _context.Customer.ToList();
+      var customers = _context.Customer.Include(c => c.MembershipType).ToList();
 
       var viewModel = new CustomersViewModel { Customers = customers };
 
