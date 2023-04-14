@@ -1,40 +1,40 @@
 ﻿using FirstApplication.Models;
 using FirstApplication.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirstApplication.Controllers
 {
   public class MoviesController : Controller
   {
+    private MyDbContext _context;
+
+    public MoviesController(MyDbContext context)
+    {
+      _context = context;
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+      _context.Dispose();
+    }
     public IActionResult Index()
     {
-      var movies = new List<Movie>
-      {
-        new Movie() {Id = 1, Name = "Shrek"},
-        new Movie() {Id = 2, Name = "Wall-e"}
-      };
+      var movies = _context.Movie.Include(c => c.MovieGenre).ToList();
 
       var viewModel = new MoviesViewModel { Movies = movies };
 
       return View(viewModel);
     }
 
-    public IActionResult Random()
+    public IActionResult Details(int id)
     {
-      var movie = new Movie() { Id = 1, Name = "Harry Potter" };
-      var customers = new List<Customer>
-      {
-        new Customer { Name = "Customer1"},
-        new Customer { Name = "Customer2"}
-      };
+      var movie = _context.Movie.Include(m => m.MovieGenre).SingleOrDefault(m => m.Id == id);
 
-      var viewModel = new RandomMovieViewModel
-      {
-        Movie = movie,
-        Customers = customers
-      };
+      if (movie == null) return StatusCode(404);
 
-      return View(viewModel);
+      return View(movie);
     }
+
   }
 }

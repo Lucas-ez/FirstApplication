@@ -1,0 +1,15 @@
+﻿@model FirstApplication.Models.Movie
+
+@{
+  var ReleaseDate = Model.ReleaseDate.ToString().Split(" ")[0];
+  var AddedDate = Model.AddedDate.ToString().Split(" ")[0];
+}
+
+<h1>@Model.Name</h1>
+
+<ul>
+  <li>Genre: @Model.MovieGenre.Name</li>
+  <li>Release Date: @ReleaseDate</li>
+  <li>Date Added: @AddedDate</li>
+  <li>Number in Stock: @Model.Stock</li>
+</ul>
