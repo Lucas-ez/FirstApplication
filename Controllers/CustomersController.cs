@@ -30,9 +30,21 @@ namespace FirstApplication.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Create(Customer customer)
+		public IActionResult Save(Customer customer)
 		{
-			_context.Customer.Add(customer);
+			if (customer.Id == 0)
+			{
+				_context.Customer.Add(customer);
+			}
+			else
+			{
+				var customerInDb = _context.Customer.Single(c => c.Id == customer.Id);
+				customerInDb.Name = customer.Name;
+				customerInDb.Birthdate = customer.Birthdate;
+				customerInDb.MemberShipTypeId = customer.MemberShipTypeId;
+				customerInDb.IsSubcribedToNewsletter = customer.IsSubcribedToNewsletter;
+			}
+
 			_context.SaveChanges();
 
 			return RedirectPermanent("/Customers");
