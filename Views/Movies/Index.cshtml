@@ -4,6 +4,10 @@
 
 <div>
 	<h1>Movies</h1>
+	@using (Html.BeginForm("New", "Movies"))
+	{
+		<button class="btn btn-primary">New Movie</button>
+	}
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -15,7 +19,7 @@
 				@foreach (var movie in Model.Movies)
 				{
 					<tr>
-						<td><a href="Movies/Details/@movie.Id">@movie.Name</a></td>
+						<td>@Html.ActionLink(movie.Name, "Edit", "Movies", new {id = movie.Id})</td>
 						<td>@movie.MovieGenre.Name</td>
 					</tr>
 				}

@@ -36,5 +36,53 @@ namespace FirstApplication.Controllers
       return View(movie);
     }
 
+    public IActionResult New()
+    {
+      var movieGenres = _context.MovieGenre.ToList();
+
+      var viewModel = new FormMovieViewModel
+      {
+        MovieGenres = movieGenres
+      };
+
+      return View("Form", viewModel);
+    }
+
+    public IActionResult Edit(int id)
+    {
+      var movie = _context.Movie.SingleOrDefault(m => m.Id == id);
+
+      if (movie == null) return StatusCode(404);
+
+      var viewModel = new FormMovieViewModel
+      {
+        Movie = movie,
+        MovieGenres = _context.MovieGenre.ToList()
+      };
+      return View("Form", viewModel);
+    }
+
+    public IActionResult Save(Movie movie)
+    {
+
+      if (movie.Id == 0)
+      {
+        movie.AddedDate = DateTime.Today;
+        _context.Movie.Add(movie);
+      }
+      else
+      {
+        var movieInDb = _context.Movie.Single(m => m.Id == movie.Id);
+
+        movieInDb.Name = movie.Name;
+        movieInDb.Stock = movie.Stock;
+        movieInDb.MovieGenreId = movie.MovieGenreId;
+        movieInDb.AddedDate = movie.AddedDate;
+      }
+
+      _context.SaveChanges();
+
+      return RedirectPermanent("/Movies");
+    }
   }
 }
