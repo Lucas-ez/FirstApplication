@@ -24,3 +24,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-block: 12px;
+  max-width: 300px;
+}
