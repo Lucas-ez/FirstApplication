@@ -29,6 +29,7 @@ namespace FirstApplication.Controllers
 			return View("Form", viewModel);
 		}
 
+		[ValidateAntiForgeryToken]
 		[HttpPost]
 		public IActionResult Save(Customer customer)
 		{

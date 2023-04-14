@@ -32,3 +32,11 @@ body {
   margin-block: 12px;
   max-width: 300px;
 }
+
+.input-validation-error {
+  border: 2px solid red;
+}
+
+.field-validation-error {
+  color: red;
+}

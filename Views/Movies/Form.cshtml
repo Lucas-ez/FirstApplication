@@ -1,7 +1,7 @@
 ﻿@model FirstApplication.ViewModels.FormMovieViewModel
 @{
 }
-@if(Model.Movie == null)
+@if(Model.Movie == null || Model.Movie.Id == 0)
 {
   <h1>New Movie</h1>
 }
@@ -15,19 +15,25 @@ else
   <div class="form-group">
     @Html.LabelFor(m => m.Movie.Name)
     @Html.TextBoxFor(m => m.Movie.Name)
+    @Html.ValidationMessageFor(m => m.Movie.Name)
   </div>
   <div class="form-group">
     @Html.LabelFor(m => m.Movie.ReleaseDate)
     @Html.TextBoxFor(m => m.Movie.ReleaseDate, new {@placeholder = "DD/MM/YYYY"})
+    @Html.ValidationMessageFor(m => m.Movie.ReleaseDate)
   </div>
   <div class="form-group">
     @Html.LabelFor(m => m.Movie.Stock)
     @Html.TextBoxFor(m => m.Movie.Stock)
+    @Html.ValidationMessageFor(m => m.Movie.Stock)
   </div>
   <div class="form-group">
     @Html.DropDownListFor(m => m.Movie.MovieGenreId, new SelectList(Model.MovieGenres, "Id", "Name"), "Select Genre")
+    @Html.ValidationMessageFor(m => m.Movie.MovieGenreId)
+
   </div>
   @Html.HiddenFor(m=> m.Movie.AddedDate)
   @Html.HiddenFor(m => m.Movie.Id)
+  @Html.AntiForgeryToken()
   <button type="submit" class="btn btn-primary">Save</button>
 }
