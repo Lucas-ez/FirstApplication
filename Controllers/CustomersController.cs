@@ -54,5 +54,18 @@ namespace FirstApplication.Controllers
 
 			return View(customer);
 		}
+		public IActionResult Edit(int id)
+		{
+			var customer = _context.Customer.SingleOrDefault(c => c.Id == id);
+
+			if (customer == null) return StatusCode(404);
+
+			var viewModel = new FormCustomerViewModel
+			{
+				Customer = customer,
+				MembershipTypes = _context.MembershipType.ToList()
+			};
+			return View("Form", viewModel);
+		}
 	}
 }
