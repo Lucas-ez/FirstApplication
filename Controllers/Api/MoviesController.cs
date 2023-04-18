@@ -63,10 +63,11 @@ namespace FirstApplication.Controllers.Api
       if (movieInDb == null)
         throw new Exception();
 
-      //movieInDb.ReleaseDate = movie.Name;
-      //movieInDb.Birthdate = movie.Birthdate;
-      //movieInDb.IsSubcribedToNewsletter = movie.IsSubcribedToNewsletter;
-      //movieInDb.MemberShipTypeId = movie.MemberShipTypeId;
+      movieInDb.ReleaseDate = movie.ReleaseDate;
+      movieInDb.AddedDate = movie.AddedDate;
+      movieInDb.MovieGenreId = movie.MovieGenreId;
+      movieInDb.MovieGenre = movie.MovieGenre;
+      movieInDb.Stock = movie.Stock;
 
       _context.SaveChanges();
     }
