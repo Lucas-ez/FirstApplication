@@ -66,22 +66,26 @@ namespace FirstApplication.Controllers
 		public IActionResult Save(Movie movie)
 		{
 
+			// ------- Falla la valiadación de los campos ---------
 			//Validations
-			if (!ModelState.IsValid)
-			{
-				var errors = ModelState.Values.SelectMany(v => v.Errors).ToList();
-				// Error, toma el campo Genre como required
-				if (!(errors.Count == 1 && errors[0].ErrorMessage == "The Genre field is required."))
-				{
-					var viewModel = new FormMovieViewModel
-					{
-						Movie = movie,
-						MovieGenres = _context.MovieGenre.ToList()
-					};
+			//if (!ModelState.IsValid)
+			//{
+			//	var errors = ModelState.Values.SelectMany(v => v.Errors).ToList();
+			//	// Error, toma el campo Genre como required
+			//	Console.WriteLine(errors.Count);
+			//	if (!(errors.Count == 1 && errors[0].ErrorMessage == "The Genre field is required."))
+			//	{
+			//		var viewModel = new FormMovieViewModel
+			//		{
+			//			Movie = movie,
+			//			MovieGenres = _context.MovieGenre.ToList()
+			//		};
 
-					return View("Form", viewModel);
-				}
-			}
+			//		Console.Write("entro aca");
+
+			//		return View("Form", viewModel);
+			//	}
+			//}
 
 
 			if (movie.Id == 0)
