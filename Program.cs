@@ -1,11 +1,16 @@
 using FirstApplication.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuracion de la conexión con la DB
+// Configuracion de la conexiï¿½n con la DB
 builder.Services.AddDbContext<MyDbContext>(opciones =>
   opciones.UseSqlServer(builder.Configuration.GetConnectionString("ConectionSql")));
+
+
+// Aunthentication
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MyDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -29,6 +34,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",

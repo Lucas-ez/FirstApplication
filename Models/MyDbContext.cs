@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirstApplication.Models
 {
-  public class MyDbContext : DbContext
+  public class MyDbContext : IdentityDbContext
   {
     public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
     {
@@ -13,6 +14,5 @@ namespace FirstApplication.Models
     public DbSet<Customer> Customer { get; set; }
     public DbSet<MembershipType> MembershipType { get; set; }
     public DbSet<MovieGenre> MovieGenre { get; set; }
-    public DbSet<User> User { get; set; }
   }
 }

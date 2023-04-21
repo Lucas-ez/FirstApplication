@@ -6,7 +6,6 @@
               aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="d-sm-inline-flex justify-content-between">
         <ul class="navbar-nav flex-grow-1">
           <li class="nav-item">
             <a class="nav-link text-dark mx-1" asp-area="" asp-controller="Customers" asp-action="Index">Customers</a>
@@ -15,6 +14,8 @@
             <a class="nav-link text-dark mx-1" asp-area="" asp-controller="Movies" asp-action="Index">Movies</a>
           </li>
         </ul>
+      <div class="d-sm-inline-flex justify-content-between">
+        <partial name="_LoginPartial"></partial>
       </div>
     </div>
   </nav>
