@@ -13,5 +13,6 @@ namespace FirstApplication.Models
     public DbSet<Customer> Customer { get; set; }
     public DbSet<MembershipType> MembershipType { get; set; }
     public DbSet<MovieGenre> MovieGenre { get; set; }
+    public DbSet<User> User { get; set; }
   }
 }
